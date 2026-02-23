@@ -1,0 +1,437 @@
+.home-page {
+  color: var(--text);
+}
+
+.hero {
+  background: linear-gradient(180deg, #fdfbf6 0%, #ffffff 100%);
+  padding: 0 0 4rem;
+}
+
+.hero-inner {
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+}
+
+.hero-image img {
+  border-radius: 12px;
+  height: 620px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-card {
+  background: var(--cream);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 5%;
+  bottom: 10%;
+  max-width: 540px;
+  width: 90%;
+}
+
+.hero-card h1 {
+  font-size: 2.8rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.hero-card p {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  line-height: 1.7;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.primary-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  padding: 1rem 2.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+}
+
+.primary-btn:hover {
+  background: #9a7829;
+}
+
+.range {
+  padding: 5rem 0 3rem;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-head h2 {
+  margin: 0.3rem 0 0.5rem;
+  font-size: 2rem;
+}
+
+.section-head p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.range-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.range-card {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+}
+
+.range-card:hover {
+  transform: translateY(-4px);
+}
+
+.range-card img {
+  border-radius: 12px;
+  height: 340px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.range-card h3 {
+  margin-top: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.products {
+  padding: 3rem 0 5rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.outline-btn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  padding: 0.9rem 3rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.outline-btn:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+.inspiration {
+  background: #fcf8f3;
+  padding: 5rem 0;
+}
+
+.inspiration-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.inspiration-text h2 {
+  margin: 0 0 1rem;
+  font-size: 2.2rem;
+  line-height: 1.3;
+}
+
+.inspiration-text p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.inspiration-media {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.5rem;
+}
+
+.media-large {
+  position: relative;
+}
+
+.media-large img {
+  border-radius: 10px;
+  height: 450px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.media-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.media-caption span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.media-caption h4 {
+  margin: 0.25rem 0 0;
+  font-size: 1.1rem;
+}
+
+.media-stack img {
+  border-radius: 10px;
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.media-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d8d8d8;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--gold);
+}
+
+.share {
+  padding: 4.8rem 0 1.25rem;
+  background: #fff;
+}
+
+.share .container {
+  width: min(1450px, calc(100% - 20px));
+}
+
+.share-head {
+  margin-bottom: 1.55rem;
+}
+
+.share-head .eyebrow {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: clamp(1.9rem, 2.3vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #6f6f6f;
+}
+
+.share-head h2 {
+  margin-top: 0.2rem;
+  font-size: clamp(4.5rem, 6.1vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: #2f2f2f;
+}
+
+.share-collage {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  grid-auto-rows: 84px;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.share-item {
+  overflow: hidden;
+  border-radius: 0;
+  background: #f5f5f5;
+  grid-column: var(--col-start) / span var(--col-span);
+  grid-row: var(--row-start) / span var(--row-span);
+}
+
+.share-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-left-shelf {
+  --col-start: 1;
+  --col-span: 1;
+  --row-start: 1;
+  --row-span: 6;
+  height: 60% !important;
+}
+
+.tile-left-desk {
+  --col-start: 2;
+  --col-span: 5;
+  --row-start: 2;
+  --row-span: 3;
+  height: 90% !important;
+}
+
+.tile-left-chair {
+  --col-start: 1;
+  --col-span: 2;
+  --row-start: 5;
+  --row-span: 3;
+  height: 110% !important;
+}
+
+.tile-left-stools {
+  --col-start: 3;
+  --col-span: 3;
+  --row-start: 5;
+  --row-span: 3;
+  height: 120% !important;
+}
+
+.tile-center-dining {
+  --col-start: 7;
+  --col-span: 3;
+  --row-start: 3;
+  --row-span: 4;
+  height: 130% !important;
+}
+
+.tile-right-bedroom {
+  --col-start: 10;
+  --col-span: 3;
+  --row-start: 2;
+  --row-span: 3;
+  height: 90% !important;
+}
+
+.tile-right-sunroom {
+  --col-start: 13;
+  --col-span: 2;
+  --row-start: 1;
+  --row-span: 4;
+  height: 90% !important;
+}
+
+.tile-right-frame {
+  --col-start: 10;
+  --col-span: 2;
+  --row-start: 5;
+  --row-span: 3;
+  height: 90% !important;
+}
+
+.tile-right-kitchen {
+  --col-start: 12;
+  --col-span: 2;
+  --row-start: 5;
+  --row-span: 3;
+  height: 90% !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-card {
+    position: static;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .hero-image img {
+    height: 400px;
+  }
+
+  .inspiration-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .share-collage {
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+    grid-auto-rows: 82px;
+  }
+}
+
+@media (max-width: 720px) {
+  .range-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .share .container {
+    width: min(1200px, 92%);
+  }
+
+  .share-head .eyebrow {
+    font-size: 1.1rem;
+  }
+
+  .share-head h2 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .share-collage {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+  }
+
+  .tile-left-shelf,
+  .tile-left-desk,
+  .tile-left-chair,
+  .tile-left-stools,
+  .tile-center-dining,
+  .tile-right-bedroom,
+  .tile-right-sunroom,
+  .tile-right-frame,
+  .tile-right-kitchen {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .hero-card h1 {
+    font-size: 2rem;
+  }
+}
