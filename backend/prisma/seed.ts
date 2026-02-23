@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient, type Category } from "../src/generated/prisma/client";
+import { PrismaClient, Category as CategoryModel } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import { hashPassword } from "../src/utils/password";
@@ -303,7 +303,7 @@ async function main() {
   ];
 
   for (const product of products) {
-    const category = categories.find((c: Category) => c.slug === product.categorySlug);
+    const category = categories.find((c: CategoryModel) => c.slug === product.categorySlug);
     
     const created = await prisma.product.upsert({
       where: { slug: product.slug },
