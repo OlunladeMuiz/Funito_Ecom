@@ -5,10 +5,8 @@ const validationResult = expressValidator.validationResult;
 import rateLimit from "express-rate-limit";
 import sanitizeHtml from "sanitize-html";
 import sgMail from "@sendgrid/mail";
-import dotenv from "dotenv";
-import winston from "winston";
 
-dotenv.config();
+import winston from "winston";
 
 const router = express.Router();
 

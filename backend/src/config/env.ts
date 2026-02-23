@@ -10,6 +10,9 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().min(1),
   STRIPE_WEBHOOK_SECRET: z.string().min(1),
   ADMIN_DEFAULT_PASSWORD: z.string().min(8).optional(), // For seeding only
+  SENDGRID_API_KEY: z.string().min(1),
+  SENDGRID_VERIFIED_SENDER: z.string().email(),
+  CONTACT_RECEIVER_EMAIL: z.string().email(),
 });
 
 export const env = envSchema.parse(process.env);
