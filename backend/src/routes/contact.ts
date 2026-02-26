@@ -7,6 +7,7 @@ import sanitizeHtml from "sanitize-html";
 import sgMail from "@sendgrid/mail";
 
 import winston from "winston";
+import { env } from "../config/env";
 
 const router = express.Router();
 
@@ -64,6 +65,11 @@ const validateContact = [
     limiter,
     validateContact,
     async (req: Request, res: Response) => {
+            // Guard: skip if email not configured
+            if (!env.SENDGRID_API_KEY || !env.CONTACT_RECEIVER_EMAIL) {
+              logger.warn("[Mailer] Email not configured — skipping send.");
+              return res.status(200).json({ success: false, reason: "EMAIL_NOT_CONFIGURED" });
+            }
       // Input validation
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
