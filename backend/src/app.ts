@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 export const app = express();
+// Trust Railway/Proxy headers for correct client IP and rate limiting
+app.set('trust proxy', 1);
 // Serve uploaded product images statically (before JSON middleware)
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 import cors from "cors";
