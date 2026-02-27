@@ -14,7 +14,10 @@ import { paymentsRouter } from "./modules/payments/payments.routes";
 
 // Security middleware
 app.use(helmet());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: 'https://funito-ecom.vercel.app',
+  credentials: true
+}));
 app.use(morgan("dev"));
 
 // Rate limiting - skip in test environment
