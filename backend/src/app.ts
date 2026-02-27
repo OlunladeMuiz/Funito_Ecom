@@ -12,6 +12,7 @@ import rateLimit from "express-rate-limit";
 import { routes } from "./routes";
 import { errorHandler } from "./middleware/error";
 import { paymentsRouter } from "./modules/payments/payments.routes";
+import { Request, Response, NextFunction } from "express";
 
 
 // Security middleware
@@ -62,3 +63,12 @@ app.use(express.json({ limit: "1mb" }));
 app.use("/api", routes);
 
 app.use(errorHandler);
+
+// Centralized error middleware for Prisma and other errors
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  if (err.code && typeof err.code === 'string' && err.code.startsWith('P')) {
+    return res.status(400).json({ message: 'Database error' });
+  }
+  res.status(500).json({ message: 'Something went wrong' });
+});

@@ -22,33 +22,41 @@ export async function listProducts(req: Request, res: Response) {
   const { search, category, min, max, page, limit } = parsed.data;
   const skip = (page - 1) * limit;
 
-  const where = {
-    isActive: true,
-    name: search ? { contains: search, mode: "insensitive" as const } : undefined,
-    category: category ? { slug: category } : undefined,
-    price: min || max ? { gte: min || undefined, lte: max || undefined } : undefined,
-  };
+  // Defensive filter construction
+  const where: any = { isActive: true };
+  if (search) where.name = { contains: search, mode: "insensitive" };
+  if (category) where.category = { slug: category };
+  if (min !== undefined || max !== undefined) {
+    where.price = {};
+    if (min !== undefined) where.price.gte = Number(min);
+    if (max !== undefined) where.price.lte = Number(max);
+  }
 
-  const [products, total] = await Promise.all([
-    prisma.product.findMany({
-      where,
-      include: { images: true, category: true },
-      orderBy: { createdAt: "desc" },
-      skip,
-      take: limit,
-    }),
-    prisma.product.count({ where }),
-  ]);
+  try {
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        where,
+        include: { images: true, category: true },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.product.count({ where }),
+    ]);
 
-  return res.json({
-    data: products,
-    pagination: {
-      page,
-      limit,
-      total,
-      totalPages: Math.ceil(total / limit),
-    },
-  });
+    return res.json({
+      data: products,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
+  } catch (error) {
+    console.error("Product List Error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }
 
 export async function getProduct(req: Request, res: Response) {
@@ -70,8 +78,13 @@ export async function getProduct(req: Request, res: Response) {
 }
 
 export async function listCategories(_req: Request, res: Response) {
-  const categories = await prisma.category.findMany({
-    orderBy: { name: "asc" },
-  });
-  return res.json(categories);
+  try {
+    const categories = await prisma.category.findMany({
+      orderBy: { name: "asc" },
+    });
+    return res.json(categories);
+  } catch (error) {
+    console.error("Category List Error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }
