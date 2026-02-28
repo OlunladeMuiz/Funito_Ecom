@@ -1,9 +1,14 @@
 import path from "path";
-// @ts-ignore
-const sharp = require("sharp");
-// POST /admin/products/upload-image
 import { Request } from "express";
 import fs from "fs";
+import { v2 as cloudinary } from "cloudinary";
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "djipok287",
+  api_key: process.env.CLOUDINARY_API_KEY || "876321583237872",
+  api_secret: process.env.CLOUDINARY_API_SECRET || "kNHQB1IDB9-HG1QoGCkIKB9yQdU",
+});
 // POST /admin/products/upload-image
 export async function uploadProductImage(req: Request, res: Response) {
   const file = (req as any).file as { path: string; originalname: string } | undefined;
@@ -11,21 +16,18 @@ export async function uploadProductImage(req: Request, res: Response) {
     return res.status(400).json({ message: "No image file uploaded" });
   }
   try {
-    // Resize/crop image to 400x400px, center crop
-    const inputPath = file.path;
-    const ext = path.extname(inputPath).toLowerCase();
-    const outputName = `resized-${Date.now()}${ext}`;
-    const outputPath = path.join(path.dirname(inputPath), outputName);
-    await sharp(inputPath)
-      .resize(400, 400, { fit: 'cover', position: 'center' })
-      .toFile(outputPath);
-    // Optionally, delete the original upload
-    try { fs.unlinkSync(inputPath); } catch {}
-    // Return the public URL (assuming /uploads is served statically)
-    const url = `/uploads/products/${outputName}`;
-    return res.json({ url });
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(file.path, {
+      folder: "products",
+      transformation: [
+        { width: 400, height: 400, crop: "fill", gravity: "auto" }
+      ]
+    });
+    // Optionally, delete the local file after upload
+    try { fs.unlinkSync(file.path); } catch {}
+    return res.json({ url: result.secure_url });
   } catch (err) {
-    return res.status(500).json({ message: "Image processing failed" });
+    return res.status(500).json({ message: "Image upload failed", error: (err as any)?.message });
   }
 }
 // Reviews management
