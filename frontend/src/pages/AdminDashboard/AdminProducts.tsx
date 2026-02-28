@@ -78,7 +78,8 @@ const AdminProducts: React.FC = () => {
     const formData = new FormData();
     formData.append("image", imageFile);
     try {
-      const res = await fetch("/api/admin/products/upload-image", {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+      const res = await fetch(`${apiUrl}/admin/products/upload-image`, {
         method: "POST",
         headers: {
           ...(apiClient.getToken() ? { Authorization: `Bearer ${apiClient.getToken()}` } : {})
