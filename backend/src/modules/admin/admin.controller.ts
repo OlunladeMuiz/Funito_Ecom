@@ -11,21 +11,27 @@ cloudinary.config({
 });
 // POST /admin/products/upload-image
 export async function uploadProductImage(req: Request, res: Response) {
-  const file = (req as any).file as { path: string; originalname: string } | undefined;
+  const file = (req as any).file as { buffer: Buffer; originalname: string } | undefined;
   if (!file) {
     return res.status(400).json({ message: "No image file uploaded" });
   }
   try {
-    // Upload to Cloudinary
-    const result = await cloudinary.uploader.upload(file.path, {
-      folder: "products",
-      transformation: [
-        { width: 400, height: 400, crop: "fill", gravity: "auto" }
-      ]
-    });
-    // Optionally, delete the local file after upload
-    try { fs.unlinkSync(file.path); } catch {}
-    return res.json({ url: result.secure_url });
+    // Upload buffer directly to Cloudinary
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "products",
+        transformation: [
+          { width: 400, height: 400, crop: "fill", gravity: "auto" }
+        ]
+      },
+      (error, result) => {
+        if (error || !result) {
+          return res.status(500).json({ message: "Image upload failed", error: error?.message });
+        }
+        return res.json({ url: result.secure_url });
+      }
+    );
+    stream.end(file.buffer);
   } catch (err) {
     return res.status(500).json({ message: "Image upload failed", error: (err as any)?.message });
   }

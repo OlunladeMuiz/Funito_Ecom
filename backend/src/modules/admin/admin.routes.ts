@@ -27,18 +27,8 @@ import {
 } from "./admin.controller";
 
 
-// Multer setup for product image uploads
-const storage = multer.diskStorage({
-  destination: function (_req: any, _file: any, cb: any) {
-    cb(null, path.join(__dirname, '../../uploads/products'));
-  },
-  filename: function (_req: any, file: any, cb: any) {
-    const ext = path.extname(file.originalname);
-    const name = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
-    cb(null, name);
-  }
-});
-const upload = multer({ storage });
+// Multer setup for product image uploads (memory storage for cloud compatibility)
+const upload = multer({ storage: multer.memoryStorage() });
 
 export const adminRouter = Router();
 
